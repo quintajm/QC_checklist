@@ -46,6 +46,8 @@ def bmi():
     radio("Is the screen protector placed firmly with resin?", options=['Approved', 'Declined'], name='resin'),
     radio("Have the wires connected to the up/down buttons been secured with crimps?", options=['Approved', 'Declined'], name='buttonCrimps'),
     radio("Have the buttons been torqued correctly?", options=['Approved', 'Declined'], name='buttonTorque'),
+    radio("Is the heat sink on the SMP5 secured with loctite?", options=['Approved', 'Declined'], name='loctiteSink'),
+
     
     #This part is to add buttons and interactable widgets like buttons
     actions('QC items', [
@@ -74,7 +76,7 @@ def bmi():
                                data['w2'],data['ScreenResolution'],data['qr'],data['icons'],
                                data['fobRead'],data['volume'],data['balena'],data['fobnumber'],
                                data['rework'],data['dipSwitch'],data['motionSensor'],data['cloth'],
-                               data['readerWires'],data['hotGlue'],data['resin'],data['buttonCrimps'],data['buttonTorque'])
+                               data['readerWires'],data['hotGlue'],data['resin'],data['buttonCrimps'],data['buttonTorque'],data['loctiteSink'])
 
 """
 def save(data,filename,folderID):
