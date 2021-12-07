@@ -12,32 +12,41 @@ def bmi():
     input("Approved by:" , placeholder='Your name',name = 'name'),
     input("Serial number:", placeholder='LVI## - 2004####', name ='serialNumber'),
     input("Board number:", placeholder='SBC - ####', name ='boardNumber'),
-    radio("Pi-heatsink", options=['Approved', 'Declined'], name = 'pi'),
+    radio("Pi-heatsink installed", options=['Approved', 'Declined'], name = 'pi'),
     radio("Electrical connections", options=['Approved', 'Declined'], name='crimp'),
-    radio("Lanyard", options=['Approved', 'Declined'], name='lanyard'),
+    radio("Lanyard installed", options=['Approved', 'Declined'], name='lanyard'),
     radio("Screen torqued@2N-m", options=['Approved', 'Declined'], name='screen'),
     radio("Scratch revision", options=['Approved', 'Declined'], name='scratch'),
     radio("Flus keypad", options=['Approved', 'Declined'], name='keypad'),
-    radio("Camera", options=['Approved', 'Declined'], name='camera'),
+    radio("Camera installed/functional", options=['Approved', 'Declined'], name='camera'),
     radio("Keylock w/locktite", options=['Approved', 'Declined'], name='keylock'),
     radio("Arrow buttons /Left up", options=['Approved', 'Declined'], name='buttons'),
-    radio("Seal on edges", options=['Approved', 'Declined'], name='seal'),
-    radio("Microphone", options=['Approved', 'Declined'], name='mic'),
-    radio("Tamper switch", options=['Approved', 'Declined'], name='tamper'),
+    radio("Seal on edges installed", options=['Approved', 'Declined'], name='seal'),
+    radio("Microphone installed/functional", options=['Approved', 'Declined'], name='mic'),
+    radio("Tamper switch installed", options=['Approved', 'Declined'], name='tamper'),
     radio("Fan polarity/Pdot=(-)", options=['Approved', 'Declined'], name='fan'),
-    radio("power_wire power wire", options=['Approved', 'Declined'], name='power_wire'),
-    radio("Ground nut", options=['Approved', 'Declined'], name='groundNut'),
+    radio("SMP5 power wire gage/spade terminals", options=['Approved', 'Declined'], name='power_wire'),
+    radio("Ground nut placed", options=['Approved', 'Declined'], name='groundNut'),
     radio("Sticker/bot-left", options=['Approved', 'Declined'], name='sticker'),
     radio("W2 jumper placed", options=['Approved', 'Declined'], name='w2'),
-    radio("Videcall", options=['Approved', 'Declined'], name='ScreenResolution'),
-    radio("QR code", options=['Approved', 'Declined'], name='qr'),
+    radio("Videcall functional", options=['Approved', 'Declined'], name='ScreenResolution'),
+    radio("QR code feature functional", options=['Approved', 'Declined'], name='qr'),
     radio("Correct icons", options=['Approved', 'Declined'], name='icons'),
     radio("Fob reads", options=['Approved', 'Declined'], name='fobRead'),
     radio("Volume correct", options=['Approved', 'Declined'], name='volume'),
     radio("Is the unit connected to Balena?", options=['Approved', 'Declined'], name='balena'),
     radio("Does the fob number match in Balena?", options=['Approved', 'Declined'], name='fobnumber'),
-    radio("Is this a reworked unit?", options=['Yes', 'No'], name='rework'),
+    radio("Is this a reworked unit? Approved = yes", options=['Approved', 'Declined'], name='rework'),
 
+    radio("Is the SMP5 dip switch locked with glue?", options=['Approved', 'Declined'], name='dipSwitch'),
+    radio("Is the Motion Sensor installed?", options=['Approved', 'Declined'], name='motionSensor'),
+    radio("Is the hidrophobic cloth placed by speakers /mic?", options=['Approved', 'Declined'], name='cloth'),
+    radio("Have the yellow /brown card reader wires been removed?", options=['Approved', 'Declined'], name='readerWires'),
+    radio("Have the connectors been locked with hot glue?", options=['Approved', 'Declined'], name='hotGlue'),
+    radio("Is the screen protector placed firmly with resin?", options=['Approved', 'Declined'], name='resin'),
+    radio("Have the wires connected to the up/down buttons been secured with crimps?", options=['Approved', 'Declined'], name='buttonCrimps'),
+    radio("Have the buttons been torqued correctly?", options=['Approved', 'Declined'], name='buttonTorque'),
+    
     #This part is to add buttons and interactable widgets like buttons
     actions('QC items', [
     {'label': 'Save results', 'value': "saved"},
@@ -57,7 +66,15 @@ def bmi():
             json.dump(data, fp, indent=4)
             
         #Save data into database
-        Data_database.log_data(data['name'],hoy,data['serialNumber'],data['boardNumber'],data['pi'],data['crimp'],data['lanyard'],data['screen'],data['scratch'],data['keypad'],data['camera'],data['keylock'],data['buttons'],data['seal'],data['mic'],data['tamper'],data['fan'],data['power_wire'],data['groundNut'],data['sticker'],data['w2'],data['ScreenResolution'],data['qr'],data['icons'],data['fobRead'],data['volume'],data['balena'],data['fobnumber'],data['rework'])
+        Data_database.log_data(data['name'],hoy,data['serialNumber'],data['boardNumber'],
+                               data['pi'],data['crimp'],data['lanyard'],data['screen'],
+                               data['scratch'],data['keypad'],data['camera'],data['keylock'],
+                               data['buttons'],data['seal'],data['mic'],data['tamper'],
+                               data['fan'],data['power_wire'],data['groundNut'],data['sticker'],
+                               data['w2'],data['ScreenResolution'],data['qr'],data['icons'],
+                               data['fobRead'],data['volume'],data['balena'],data['fobnumber'],
+                               data['rework'],data['dipSwitch'],data['motionSensor'],data['cloth'],
+                               data['readerWires'],data['hotGlue'],data['resin'],data['buttonCrimps'],data['buttonTorque'])
 
 """
 def save(data,filename,folderID):
