@@ -47,13 +47,22 @@ def bmi():
     radio("Have the wires connected to the up/down buttons been secured with crimps?", options=['Approved', 'Declined'], name='buttonCrimps'),
     radio("Have the buttons been torqued correctly?", options=['Approved', 'Declined'], name='buttonTorque'),
     radio("Is the heat sink on the SMP5 secured with loctite?", options=['Approved', 'Declined'], name='loctiteSink'),
+    radio("Is the unit packed in a box with a plastic bag around it?", options=['Approved', 'Declined'], name='packed'),
+    radio("Is the accessory bag attached? (Keys,Cloth,Bolts,Washers)", options=['Approved', 'Declined'], name='accessories'),
 
-    
     #This part is to add buttons and interactable widgets like buttons
     actions('QC items', [
     {'label': 'Save results', 'value': "saved"},
     ], name='action', help_text='actions'),
     ])
+    
+    # Upload a file and save to server
+    photos = input_group("pictures",[file_upload(label = 'Exterior and interior photos from unit',
+                                                 placeholder = 'Choose file', multiple = True,name='photos')])
+    filename = data['serialNumber']
+    with open("/home/pi/Desktop/2000_QC_capturing_QC.com/data/pictures/{0}.jpeg".format(filename), "wb") as file:
+        file.write(photos['photos'][0]['content'])
+        
     #print(data["name"], data["serialNumber"], data["boardNumber"])
     if data["rework"] == "Yes":
         filename = data["serialNumber"]+ '-R' + '.json'
@@ -76,7 +85,8 @@ def bmi():
                                data['w2'],data['ScreenResolution'],data['qr'],data['icons'],
                                data['fobRead'],data['volume'],data['balena'],data['fobnumber'],
                                data['rework'],data['dipSwitch'],data['motionSensor'],data['cloth'],
-                               data['readerWires'],data['hotGlue'],data['resin'],data['buttonCrimps'],data['buttonTorque'],data['loctiteSink'])
+                               data['readerWires'],data['hotGlue'],data['resin'],data['buttonCrimps'],
+                               data['buttonTorque'],data['loctiteSink'],data['packed'],data['accessories'])
 
 """
 def save(data,filename,folderID):
